@@ -5,14 +5,18 @@ const Circle = require("../lib/Circle.js");
 
 function generateLogo(data) {
   if (data.shape === "Circle") {
-    const circleLogo = new Circle();
-    return circleLogo.render(data);
+    const circleLogo = new Circle(data.text, data.textColor, data.shapeColor);
+    return circleLogo.render();
   } else if (data.shape === "Triangle") {
-    const triangleLogo = new Triangle();
-    return triangleLogo.render(data);
+    const triangleLogo = new Triangle(
+      data.text,
+      data.textColor,
+      data.shapeColor
+    );
+    return triangleLogo.render();
   } else {
-    const squareLogo = new Square();
-    return squareLogo.render(data);
+    const squareLogo = new Square(data.text, data.textColor, data.shapeColor);
+    return squareLogo.render();
   }
 }
 
