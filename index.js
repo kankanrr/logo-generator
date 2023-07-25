@@ -1,9 +1,7 @@
 const inquirer = require("inquirer");
-
 const fs = require("fs");
 const generateLogo = require("./utils/generateLogo.js");
 
-//array of questions for user input
 const questions = [
   {
     name: "text",
@@ -18,17 +16,16 @@ const questions = [
   {
     name: "shape",
     type: "list",
-    message: "Input shape color (Enter color keyword OR a hexadecimal number):",
+    message: "Select shape:",
     choices: ["Circle", "Triangle", "Square"],
   },
   {
     name: "shapeColor",
     type: "input",
-    message: "Input shape color:",
+    message: "Input shape color (Enter color keyword OR a hexadecimal number):",
   },
 ];
 
-//function to write file
 function writeToFile(fileName, data) {
   fs.writeFile(fileName, data, (err) => {
     if (err) throw err;
@@ -36,13 +33,12 @@ function writeToFile(fileName, data) {
   });
 }
 
-//function to handleAnswers
 const handleAnswers = (answers) => {
   if (answers.text.length > 3) {
     console.log("Text must be 3 characters or less");
     init();
   } else {
-    // gen logo as svg
+    //gen svg
     writeToFile("logo.svg", generateLogo(answers));
   }
 };
@@ -51,5 +47,5 @@ function init() {
   inquirer.prompt(questions).then(handleAnswers);
 }
 
-// INITIALIZATION
+// initialization
 init();
