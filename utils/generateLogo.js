@@ -1,10 +1,19 @@
+const Shape = require("../lib/Shape.js");
+const Triangle = require("../lib/Triangle.js");
+const Square = require("../lib/Square.js");
+const Circle = require("../lib/Circle.js");
+
 function generateLogo(data) {
-  return `<svg height="300" width="200">
-    <circle cx="100" cy="100" r="80" fill="${data.shapeColor}" />
-    <text x="55" y="115" font-size="4em" fill="${
-      data.textColor
-    }">${data.text.toUpperCase()}</text>
-  </svg>`;
+  if (data.shape === "Circle") {
+    const circleLogo = new Circle();
+    return circleLogo.render(data);
+  } else if (data.shape === "Triangle") {
+    const triangleLogo = new Triangle();
+    return triangleLogo.render(data);
+  } else {
+    const squareLogo = new Square();
+    return squareLogo.render(data);
+  }
 }
 
 module.exports = generateLogo;

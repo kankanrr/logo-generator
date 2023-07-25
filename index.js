@@ -13,12 +13,12 @@ const questions = [
   {
     name: "textColor",
     type: "input",
-    message: "Input text color:",
+    message: "Input text color (Enter color keyword OR a hexadecimal number):",
   },
   {
     name: "shape",
     type: "list",
-    message: "Select shape:",
+    message: "Input shape color (Enter color keyword OR a hexadecimal number):",
     choices: ["Circle", "Triangle", "Square"],
   },
   {
@@ -38,12 +38,18 @@ function writeToFile(fileName, data) {
 
 //function to handleAnswers
 const handleAnswers = (answers) => {
-  console.log(answers);
-  writeToFile("logo.svg", generateLogo(answers));
+  if (answers.text.length > 3) {
+    console.log("Text must be 3 characters or less");
+    init();
+  } else {
+    // gen logo as svg
+    writeToFile("logo.svg", generateLogo(answers));
+  }
 };
 
 function init() {
   inquirer.prompt(questions).then(handleAnswers);
 }
-// Function call to initialize app
+
+// INITIALIZATION
 init();
